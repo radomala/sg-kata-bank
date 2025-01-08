@@ -12,7 +12,7 @@ import java.util.List;
 public class Operation {
 
     // Current account balance
-    private double solde;
+    private double balance;
 
     // List to store the history of transactions
     private final List<History> historyTransaction = new ArrayList<>();
@@ -24,9 +24,9 @@ public class Operation {
      * @param amount The amount to deposit (must be > 0).
      */
     public void deposit(double amount) {
-        solde += (amount > 0) ? amount : throwException("Your deposit is invalid, please enter a value greater than zero");
+        balance += (amount > 0) ? amount : throwException("Your deposit is invalid, please enter a value greater than zero");
         // Add the deposit operation to the transaction history
-        historyTransaction.add(new History(OperationType.DEPOSIT, amount, new Date(), solde));
+        historyTransaction.add(new History(OperationType.DEPOSIT, amount, new Date(), balance));
     }
 
     /**
@@ -37,9 +37,9 @@ public class Operation {
      * @param amount The amount to withdraw (must be > 0 and <= current balance).
      */
     public void withdraw(double amount) {
-        solde = (amount > 0 && amount <= solde) ? solde - amount : throwException ("Invalid withdrawal amount");
+        balance = (amount > 0 && amount <= balance) ? balance - amount : throwException ("Invalid withdrawal amount");
         // Add the withdrawal operation to the transaction history
-        historyTransaction.add(new History(OperationType.WITHDRAWAL, amount, new Date(), solde));
+        historyTransaction.add(new History(OperationType.WITHDRAWAL, amount, new Date(), balance));
     }
 
     /**
@@ -60,7 +60,7 @@ public class Operation {
             System.out.println("Date: " + history.date());
             System.out.println("Type: " + history.type());
             System.out.println("Amount: " + history.amount());
-            System.out.println("Balance After: " + history.soldeAfter());
+            System.out.println("Balance After: " + history.balanceAfter());
             System.out.println("------------------------------------------------");
         }
     }
@@ -80,17 +80,17 @@ public class Operation {
      *
      * @return The current account balance.
      */
-    public double getSolde() {
-        return solde;
+    public double getBalance() {
+        return balance;
     }
 
     /**
      * Constructor to initialize the account with a specific balance.
      *
-     * @param solde The initial balance of the account.
+     * @param balance The initial balance of the account.
      */
-    public Operation(double solde) {
-        this.solde = solde;
+    public Operation(double balance) {
+        this.balance = balance;
     }
 
     /**

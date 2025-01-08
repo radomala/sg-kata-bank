@@ -27,12 +27,12 @@ public class HistoryTest {
         assertEquals(OperationType.DEPOSIT, depositTransaction.type());
         assertEquals(500, depositTransaction.amount());
         assertNotNull(depositTransaction.date());
-        assertEquals(1500, depositTransaction.soldeAfter());
+        assertEquals(1500, depositTransaction.balanceAfter());
 
         History withdrawalTransaction = history.get(1);
         assertEquals(OperationType.WITHDRAWAL, withdrawalTransaction.type());
         assertEquals(300, withdrawalTransaction.amount());
         assertNotNull(withdrawalTransaction.date());
-        assertEquals(1200, withdrawalTransaction.soldeAfter());
+        assertEquals(1200, withdrawalTransaction.balanceAfter());
     }
 }
