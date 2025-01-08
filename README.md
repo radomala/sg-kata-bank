@@ -45,4 +45,17 @@ Possible cases to test
 
 Implementation of deposit method in BankAccount class
 
+Refactor the code (Refactor)
 
+===================================================================
+US 2 : In order to retrieve some or all of my savings as a bank client I want to make a
+withdrawal from my account
+
+Example test cases:
+1) Valid withdrawal (amount less than or equal to the balance).
+2) Withdrawal with a negative amount (should fail).
+3) Withdrawal exceeding the balance (should fail).
+
+Implement the withdraw method in the BankAccount class to make the tests pass.
+
+Refactor the code

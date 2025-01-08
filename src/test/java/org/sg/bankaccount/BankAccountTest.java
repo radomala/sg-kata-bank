@@ -10,7 +10,7 @@ public class BankAccountTest {
     public void testDepositPositiveAmount() {
         BankAccount account = new BankAccount();
         account.deposit(100.0);
-        assertEquals(100.0, account.getBalance(), "Balance should be 100 after depositing 100");
+        assertEquals(100.0, account.getSolde(), "Balance should be 100 after depositing 100");
     }
 
     @Test
@@ -38,6 +38,42 @@ public class BankAccountTest {
         BankAccount account = new BankAccount();
         account.deposit(100.0); // 1er dépôt
         account.deposit(50.0);  // 2em dépôt
-        assertEquals(150.0, account.getBalance(), "Balance should be 150 after depositing 100 and 50");
+        assertEquals(150.0, account.getSolde(), "Balance should be 150 after depositing 100 and 50");
+    }
+
+    @Test
+    public void testWithdrawValidAmount() {
+        BankAccount account = new BankAccount();
+        account.deposit(500.0); //First deposit 500 into account
+        account.withdraw(100.0); // Retirer 100
+
+        assertEquals(400.0, account.getSolde());
+    }
+
+    @Test
+    public void testWithdrawMoreThanBalanceThrowsException() {
+        BankAccount account = new BankAccount();
+        account.deposit(300.0); // Déposer 300
+        assertThrows(IllegalArgumentException.class, () -> account.withdraw(1500.0)); // Tentative de retirer 150
+    }
+
+    @Test
+    public void testWithdrawZeroAmountThrowsException() {
+        BankAccount account = new BankAccount();
+        assertThrows(IllegalArgumentException.class, () -> account.withdraw(0.0));
+    }
+
+    @Test
+    public void testWithdrawNegativeAmountThrowsException() {
+        BankAccount account = new BankAccount();
+        assertThrows(IllegalArgumentException.class, () -> account.withdraw(-50.0));
+    }
+
+    @Test
+    public void testBalanceAfterValidWithdrawal() {
+        BankAccount account = new BankAccount();
+        account.deposit(100.0); // Dépôt initial
+        account.withdraw(30.0); // Retrait
+        assertEquals(70.0, account.getSolde()); // Vérification du solde restant
     }
 }
