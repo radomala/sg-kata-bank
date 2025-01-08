@@ -12,7 +12,7 @@ public class OperationTest {
     @Test
     void testGetSolde() {
         Operation operation = new Operation(100.0);
-        double balance = operation.getSolde();
+        double balance = operation.getBalance();
         assertEquals(100.0, balance, "The balance should be 100.0");
     }
 
@@ -23,7 +23,7 @@ public class OperationTest {
     void testConstructorWithInitialBalance() {
         double initialBalance = 200.0;
         Operation operation = new Operation(initialBalance);
-        assertEquals(200.0, operation.getSolde(), "The balance should be initialized to 200.0");
+        assertEquals(200.0, operation.getBalance(), "The balance should be initialized to 200.0");
     }
 
     /**
@@ -32,7 +32,7 @@ public class OperationTest {
     @Test
     void testDefaultConstructor() {
         Operation operation = new Operation();
-        assertEquals(0.0, operation.getSolde(), "The balance should be initialized to 0.0");
+        assertEquals(0.0, operation.getBalance(), "The balance should be initialized to 0.0");
     }
 
     /**
@@ -42,7 +42,7 @@ public class OperationTest {
     public void testDepositPositiveAmount() {
         Operation account = new Operation();
         account.deposit(100.0);
-        assertEquals(100.0, account.getSolde(), "Balance should be 100 after depositing 100");
+        assertEquals(100.0, account.getBalance(), "Balance should be 100 after depositing 100");
     }
 
     /**
@@ -79,7 +79,7 @@ public class OperationTest {
         Operation account = new Operation();
         account.deposit(100.0); // 1er dépôt
         account.deposit(50.0);  // 2em dépôt
-        assertEquals(150.0, account.getSolde(), "Balance should be 150 after depositing 100 and 50");
+        assertEquals(150.0, account.getBalance(), "Balance should be 150 after depositing 100 and 50");
     }
 
     /**
@@ -91,7 +91,7 @@ public class OperationTest {
         account.deposit(500.0); //First deposit 500 into account
         account.withdraw(100.0); // Retirer 100
 
-        assertEquals(400.0, account.getSolde());
+        assertEquals(400.0, account.getBalance());
     }
 
     /**
@@ -100,8 +100,8 @@ public class OperationTest {
     @Test
     public void testWithdrawMoreThanBalanceThrowsException() {
         Operation account = new Operation();
-        account.deposit(300.0); // Déposer 300
-        assertThrows(IllegalArgumentException.class, () -> account.withdraw(1500.0)); // Tentative de retirer 150
+        account.deposit(300.0); // Déposit 300
+        assertThrows(IllegalArgumentException.class, () -> account.withdraw(1500.0));
     }
 
     /**
@@ -130,7 +130,7 @@ public class OperationTest {
         Operation account = new Operation();
         account.deposit(100.0); // Dépôsit initial
         account.withdraw(30.0); // withdraw
-        assertEquals(70.0, account.getSolde()); // Vérification du solde restant
+        assertEquals(70.0, account.getBalance());
     }
 
     /*
